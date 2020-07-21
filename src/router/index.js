@@ -23,6 +23,7 @@ export function createRouter() {
       { path: "/item/:id(\\d+)", component: ItemView },
       { path: "/user/:id", component: UserView },
       { path: "/", component: ItemView },
+      { path: "/booking", component: ()=> import('../views/Booking.vue') },
     ],
   });
 }

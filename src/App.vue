@@ -1,102 +1,103 @@
 <template>
-  <div id="app">
-    <header class="header">
-      <nav class="inner">
-        <router-link to="/" exact>
-          <img class="logo" src="~public/logo-48.png" alt="logo">
-        </router-link>
-        <router-link to="/top">Top</router-link>
-        <router-link to="/new">New</router-link>
-        <router-link to="/show">Show</router-link>
-        <router-link to="/ask">Ask</router-link>
-        <router-link to="/job">Jobs</router-link>
-        <a class="github" href="https://github.com/vuejs/vue-hackernews-2.0" target="_blank" rel="noopener">
-          Built with Vue.js
-        </a>
-      </nav>
-    </header>
+  <div id="app" class="app-container">
+    <div class="sidebar-container">
+      <b-menu>
+    <b-menu-list label="Menu">
+      <b-menu-item icon="information-outline" label="Справочник"></b-menu-item>
+      <b-menu-item icon="map-outline" label="Карта" @click="pushToMap"></b-menu-item>
+      <!-- <b-menu-item icon="settings" :active="isActive" expanded>
+        <template slot="label" slot-scope="props">
+          Administrator
+          <b-icon class="is-pulled-right" :icon="props.expanded ? 'menu-down' : 'menu-up'"></b-icon>
+        </template>
+        <b-menu-item icon="account" label="Users"></b-menu-item>
+        <b-menu-item icon="cellphone-link">
+          <template slot="label">
+            Devices
+            <b-dropdown aria-role="list" class="is-pulled-right" position="is-bottom-left">
+              <b-icon icon="dots-vertical" slot="trigger"></b-icon>
+              <b-dropdown-item aria-role="listitem">Action</b-dropdown-item>
+              <b-dropdown-item aria-role="listitem">Another action</b-dropdown-item>
+              <b-dropdown-item aria-role="listitem">Something else</b-dropdown-item>
+            </b-dropdown>
+          </template>
+        </b-menu-item>
+        <b-menu-item icon="cash-multiple" label="Payments" disabled></b-menu-item>
+      </b-menu-item> -->
+      <b-menu-item icon="account" label="Бронирование" @click="pushBooking">
+      </b-menu-item>
+    </b-menu-list>
+    <b-menu-list>
+      <b-menu-item label="Expo" icon="link" tag="router-link" target="_blank" to="/expo"></b-menu-item>
+    </b-menu-list>
+    <b-menu-list label="Actions">
+      <b-menu-item label="Logout"></b-menu-item>
+    </b-menu-list>
+  </b-menu>
+             </div>
+             <div class="view-container">
     <transition name="fade" mode="out-in">
       <router-view class="view"></router-view>
     </transition>
+    </div>
   </div>
 </template>
 
-<style lang="stylus">
-body
-  font-family -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
-  font-size 15px
-  background-color lighten(#eceef1, 30%)
-  margin 0
-  padding-top 55px
-  color #34495e
-  overflow-y scroll
+<script>
+export default {
+  data() {
+    return {
+       open: true,
+      overlay: true,
+      fullheight: true,
+      fullwidth: false,
+      right: false,
+      reduce: false,
+      expandOnHover: false,
+      mobile: true
+    }
+  },
+  methods: {
+    pushBooking() {
+      console.log('Push to booking')
+      this.$router.push({path: '/booking'})
+    },
+    pushToMap() {
+        this.$router.push({path: '/'})
+    }
+  }
+}
+</script>
 
-a
-  color #34495e
-  text-decoration none
+<style >
+* {
+  box-sizing: border-box;
+}
+.app-container {
+  display: flex;
+}
+/* .sidebar-container {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  height: 100vh;
+} */
 
-.header
-  background-color #ff6600
-  position fixed
-  z-index 999
-  height 55px
-  top 0
-  left 0
-  right 0
-  .inner
-    max-width 800px
-    box-sizing border-box
-    margin 0px auto
-    padding 15px 5px
-  a
-    color rgba(255, 255, 255, .8)
-    line-height 24px
-    transition color .15s ease
-    display inline-block
-    vertical-align middle
-    font-weight 300
-    letter-spacing .075em
-    margin-right 1.8em
-    &:hover
-      color #fff
-    &.router-link-active
-      color #fff
-      font-weight 400
-    &:nth-child(6)
-      margin-right 0
-  .github
-    color #fff
-    font-size .9em
-    margin 0
-    float right
+.sidebar-container {
+  background-color: white;
+  width: 20%;
+  height: 100vh;
+  /* z-index: 10; */
+}
 
-.logo
-  width 24px
-  margin-right 10px
-  display inline-block
-  vertical-align middle
-
-.view
-  max-width 800px
-  margin 0 auto
-  position relative
-
-.fade-enter-active, .fade-leave-active
-  transition all .2s ease
-
-.fade-enter, .fade-leave-active
-  opacity 0
-
-@media (max-width 860px)
-  .header .inner
-    padding 15px 30px
-
-@media (max-width 600px)
-  .header
-    .inner
-      padding 15px
-    a
-      margin-right 1em
-    .github
-      display none
+.view-container {
+  
+  width: 80%;
+  height: 100vh;
+}
+.menu {
+  margin-left: 20px;
+  margin-top: 30px;
+}
 </style>

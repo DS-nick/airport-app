@@ -5,9 +5,12 @@ import { createRouter } from './router'
 import { sync } from 'vuex-router-sync'
 import titleMixin from './util/title'
 import * as filters from './util/filters'
+import Buefy from 'buefy'
+import 'buefy/dist/buefy.css'
 
 // mixin for handling title
 Vue.mixin(titleMixin)
+Vue.use(Buefy)
 
 // register global utility filters.
 Object.keys(filters).forEach(key => {
